@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+wishes.db
+.DS_Store

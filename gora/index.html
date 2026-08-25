@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Место силы · daria.purr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --dusk:#FBF2E3; --deep:#FFFFFF; --panel:#FFFFFF;
+    --cream:#3A2C1C; --muted:#8A6D42; --gold:#C9973C; --rose:#C67C5B;
+    --line:#EAD9B7; --glow:rgba(232,182,83,0.45); --soft-text:#5C4A32;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{ background:var(--dusk); color:var(--cream); font-family:'Lora',Georgia,serif; line-height:1.6; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+  body::before{ content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background: radial-gradient(120% 60% at 50% -10%, var(--glow), transparent 60%), radial-gradient(80% 50% at 50% 110%, rgba(201,151,60,0.12), transparent 60%); }
+  .wrap{ position:relative; z-index:1; max-width:640px; margin:0 auto; padding:0 22px 64px; }
+
+  .embers{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;}
+  .ember{ position:absolute; bottom:-10px; width:3px; height:3px; border-radius:50%; background:var(--gold); box-shadow:0 0 6px 1px var(--gold); opacity:0; animation:rise linear infinite; }
+  @keyframes rise{ 0%{transform:translateY(0) translateX(0); opacity:0;} 12%{opacity:.7;} 80%{opacity:.5;} 100%{transform:translateY(-105vh) translateX(20px); opacity:0;} }
+
+  header{ position:relative; text-align:center; width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); margin-bottom:6px; background-image: linear-gradient(180deg, rgba(251,242,227,.3), rgba(251,242,227,.92) 82%, var(--dusk) 100%), url('/assets/panorama.jpg'); background-size:cover; background-position:center 58%; }
+  .header-inner{ max-width:640px; margin:0 auto; padding:56px 22px 34px; }
+  .photo{ margin:0 0 30px; border-radius:14px; overflow:hidden; border:1px solid var(--line); box-shadow:0 10px 30px rgba(160,120,40,.14); background:var(--panel); }
+  .photo img{ width:100%; display:block; aspect-ratio:4/3; object-fit:cover; object-position:center; }
+  .photo.tall img{ aspect-ratio:3/4; object-position:center 30%; }
+  .photo figcaption{ padding:12px 16px; font-size:13px; font-style:italic; color:var(--muted); text-align:center; }
+  .kicker{ font-size:11px; letter-spacing:5px; text-transform:uppercase; color:var(--gold); margin-bottom:22px; }
+  h1{ font-family:'Forum','Times New Roman',serif; font-weight:400; letter-spacing:1px; font-size:clamp(38px,10.5vw,60px); line-height:1.04; color:var(--cream); }
+  h1 .em{ color:var(--gold); }
+  .lede{ margin:24px auto 0; max-width:490px; font-size:16px; color:var(--soft-text); }
+  .lede .soft{ color:var(--muted); font-style:italic; }
+  .divider{ width:44px; height:1px; background:var(--gold); margin:32px auto; opacity:.6; }
+
+  .how{ text-align:center; margin-bottom:44px; }
+  .how h2{ font-family:'Forum',serif; font-weight:400; font-size:24px; color:var(--cream); margin-bottom:12px; letter-spacing:.5px; }
+  .how p{ color:var(--soft-text); max-width:500px; margin:0 auto 8px; font-size:15.5px; }
+  .how .accent{ color:var(--gold); }
+  .forms{ list-style:none; max-width:400px; margin:20px auto 0; text-align:left; }
+  .forms li{ position:relative; padding:9px 0 9px 26px; font-size:15px; color:var(--soft-text); border-bottom:1px solid var(--line); }
+  .forms li:last-child{ border-bottom:none; }
+  .forms li::before{ content:""; position:absolute; left:4px; top:16px; width:6px; height:6px; border-radius:50%; background:var(--gold); }
+
+  /* results */
+  .results{ margin-bottom:46px; }
+  .results .eyebrow{ text-align:center; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+  .results h2{ font-family:'Forum',serif; font-weight:400; font-size:28px; text-align:center; color:var(--cream); margin-bottom:26px; letter-spacing:.5px; }
+  .result{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px 20px 16px; margin-bottom:16px; box-shadow:0 6px 20px rgba(201,151,60,.08); }
+  .ba{ }
+  .col{ }
+  .col .lab{ display:block; font-size:10.5px; letter-spacing:2px; text-transform:uppercase; margin-bottom:4px; }
+  .was .lab{ color:var(--muted); }
+  .now .lab{ color:var(--gold); }
+  .was p{ color:var(--muted); font-size:15px; }
+  .now p{ color:var(--cream); font-size:15px; }
+  .ar{ text-align:center; color:var(--gold); font-size:18px; margin:10px 0; opacity:.8; }
+  .who{ margin-top:14px; padding-top:12px; border-top:1px solid var(--line); font-family:'Forum',serif; font-size:16px; color:var(--gold); }
+
+  /* tariffs */
+  .tariffs{ margin-bottom:46px; }
+  .tariffs .eyebrow{ text-align:center; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+  .tariffs h2{ font-family:'Forum',serif; font-weight:400; font-size:28px; text-align:center; color:var(--cream); margin-bottom:26px; letter-spacing:.5px; }
+  .tariff{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px; margin-bottom:14px; box-shadow:0 6px 20px rgba(201,151,60,.08); }
+  .tname{ font-family:'Forum',serif; font-size:18px; color:var(--gold); margin-bottom:6px; }
+  .tdesc{ font-size:14.5px; color:var(--soft-text); margin-bottom:12px; }
+  .tprice{ font-family:'Forum',serif; font-size:24px; color:var(--cream); }
+  .pay-btn{ display:block; text-align:center; text-decoration:none; margin-top:18px; background:var(--gold); color:#2A1F10; border-radius:9px; font-family:'Lora',serif; font-weight:600; font-size:16px; padding:15px 18px; box-shadow:0 8px 22px rgba(201,151,60,.28); transition:transform .15s ease, background .25s; }
+  .pay-btn:hover{ background:#DDAA55; transform:translateY(-1px); }
+  .pay-btn:focus-visible{ outline:2px solid var(--cream); outline-offset:3px; }
+
+  .ritual{ background:linear-gradient(180deg,#FFFFFF,var(--dusk)); border:1px solid var(--line); border-radius:14px; padding:30px 24px 26px; box-shadow:0 20px 50px rgba(160,120,40,.14), inset 0 1px 0 rgba(255,255,255,.8); transition:opacity .9s ease, transform .9s ease; }
+  .ritual h2{ font-family:'Forum',serif; font-weight:400; font-size:26px; color:var(--cream); margin-bottom:6px; letter-spacing:.5px; }
+  .ritual .hint{ font-size:13.5px; color:var(--muted); font-style:italic; margin-bottom:20px; }
+  label{ display:block; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin:0 0 8px 2px; }
+  input[type=text], textarea{ width:100%; background:var(--deep); border:1px solid var(--line); border-radius:9px; color:var(--cream); font-family:'Lora',serif; font-size:16px; padding:13px 15px; transition:border-color .25s, box-shadow .25s; resize:vertical; }
+  input::placeholder, textarea::placeholder{ color:#B8A17E; }
+  input:focus, textarea:focus{ outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(201,151,60,.18); }
+  textarea{ min-height:118px; line-height:1.55; }
+  .field{ margin-bottom:18px; }
+  .field .sub{ font-size:12px; color:var(--muted); font-style:italic; margin:6px 2px 0; letter-spacing:0; text-transform:none; }
+  .btn{ -webkit-appearance:none; appearance:none; cursor:pointer; width:100%; margin-top:6px; background:var(--gold); color:#2A1F10; border:none; border-radius:9px; font-family:'Lora',serif; font-weight:600; font-size:16px; letter-spacing:.3px; padding:15px 18px; transition:transform .15s ease, background .25s, box-shadow .25s; box-shadow:0 8px 22px rgba(201,151,60,.28); }
+  .btn:hover{ background:#DDAA55; transform:translateY(-1px); }
+  .btn:active{ transform:translateY(0); }
+  .btn:focus-visible{ outline:2px solid var(--cream); outline-offset:3px; }
+  .ritual.released{ opacity:0; transform:translateY(-14px) scale(.98); pointer-events:none; }
+
+  .done{ display:none; text-align:center; padding:14px 6px 4px; animation:fadein 1s ease both; }
+  .done.show{ display:block; }
+  .done .mark{ font-size:30px; margin-bottom:10px; }
+  .done h2{ font-family:'Forum',serif; font-weight:400; font-size:28px; color:var(--gold); margin-bottom:12px; }
+  .done p{ color:var(--soft-text); max-width:440px; margin:0 auto 10px; }
+  @keyframes fadein{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;} }
+
+  footer{ margin-top:56px; text-align:center; }
+  footer .sig{ font-family:'Forum',serif; font-size:22px; color:var(--cream); letter-spacing:1px; }
+  footer .tag{ font-size:11px; letter-spacing:2px; color:var(--muted); margin-top:4px; text-transform:uppercase; }
+  footer .fine{ font-size:12px; color:#6B5334; margin-top:18px; max-width:450px; margin-left:auto; margin-right:auto; line-height:1.5; }
+
+  @media (prefers-reduced-motion: reduce){ .embers{display:none;} *{animation:none !important; scroll-behavior:auto;} }
+</style>
+</head>
+<body>
+  <div class="embers" id="embers" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <header>
+      <div class="header-inner">
+        <div class="kicker">12 августа · Время намерений</div>
+        <h1>Передай своё <span class="em">желание</span><br>месту силы</h1>
+        <p class="lede">
+          12 августа я поднимаюсь в место силы. Это случается раз в год, в особенный день. Отнесу твоё желание туда, где однажды сбылось моё собственное, и попрошу за тебя.
+        </p>
+        <div class="divider"></div>
+      </div>
+    </header>
+
+    <section class="how" aria-labelledby="how-title">
+      <h2 id="how-title">Как это работает</h2>
+      <p>Ты пишешь своё желание, я беру его с собой в место силы 12 августа и прошу, чтобы оно исполнилось.</p>
+      <p><span class="accent">Подхожу к каждому желанию с полным вниманием и уважением.</span> Несу его туда, где мысли отзываются сильнее.</p>
+      <figure class="photo"><img src="/assets/ruka-s-nityu.jpg" alt="Рука с нитью на месте силы" loading="lazy"></figure>
+    </section>
+
+    <!-- РЕЗУЛЬТАТЫ. Марина/Анна/Ольга/Светлана — примеры, замени на реальные отзывы женщин. Алина — реальный кейс из "пост закреп кейсы.md". -->
+    <section class="results" aria-labelledby="res-title">
+      <div class="eyebrow">Истории участниц</div>
+      <h2 id="res-title">Что меняется внутри</h2>
+
+      <div class="result">
+        <div class="ba">
+          <div class="col was"><span class="lab">Было</span><p>Тянула всё на себе, к вечеру пустая, давно не помнила, чего хочу сама.</p></div>
+          <div class="ar">✧</div>
+          <div class="col now"><span class="lab">Стало</span><p>Впервые за год сплю спокойно и снова чувствую свои желания.</p></div>
+        </div>
+        <div class="who">Марина</div>
+      </div>
+
+      <div class="result">
+        <div class="ba">
+          <div class="col was"><span class="lab">Было</span><p>Три года держалась за работу, где выгорала, потому что было страшно уйти в неизвестность.</p></div>
+          <div class="ar">✧</div>
+          <div class="col now"><span class="lab">Стало</span><p>Разрешила себе уйти. Через месяц пришло предложение, о котором даже не просила.</p></div>
+        </div>
+        <div class="who">Анна</div>
+      </div>
+
+      <div class="result">
+        <div class="ba">
+          <div class="col was"><span class="lab">Было</span><p>Отношения, где меня будто не замечали, а я всё терпела и держалась за привычное.</p></div>
+          <div class="ar">✧</div>
+          <div class="col now"><span class="lab">Стало</span><p>Разрешила себе выбирать. Рядом стал появляться мужчина, с которым впервые чувствую себя женщиной.</p></div>
+        </div>
+        <div class="who">Ольга</div>
+      </div>
+
+      <div class="result">
+        <div class="ba">
+          <div class="col was"><span class="lab">Было</span><p>Загадала доход больше миллиона в месяц.</p></div>
+          <div class="ar">✧</div>
+          <div class="col now"><span class="lab">Стало</span><p>Через месяц эта сумма пришла на карту, часть заработала всего за шесть дней активной работы.</p></div>
+        </div>
+        <div class="who">Алина</div>
+      </div>
+
+      <div class="result">
+        <div class="ba">
+          <div class="col was"><span class="lab">Было</span><p>Снаружи успешная, внутри выжатая, всё через силу и контроль.</p></div>
+          <div class="ar">✧</div>
+          <div class="col now"><span class="lab">Стало</span><p>Перестала себя гнать, и дела пошли легче, чем когда я надрывалась.</p></div>
+        </div>
+        <div class="who">Светлана</div>
+      </div>
+
+      <p style="text-align:center; color:var(--muted); font-size:12.5px; font-style:italic; max-width:440px; margin:22px auto 0;">Каждый путь свой. Место силы даёт импульс, а дальше идёшь ты сама.</p>
+    </section>
+
+    <section class="tariffs" aria-labelledby="tariffs-title">
+      <div class="eyebrow">Твой вклад</div>
+      <h2 id="tariffs-title">Три варианта</h2>
+      <p style="text-align:center; color:var(--soft-text); font-size:15px; margin-bottom:22px;">Три уровня различаются тем, что происходит дальше. Внимание и забота одинаковые в каждом из них.</p>
+
+      <div class="tariff">
+        <div class="tname">Импульс</div>
+        <p class="tdesc">Несу твоё желание в место силы 12 августа, называю вслух, присылаю фото и видео с места.</p>
+        <div class="tprice">390 ₽</div>
+      </div>
+
+      <div class="tariff">
+        <div class="tname">Подношение</div>
+        <p class="tdesc">Всё то же самое, и оставляю подношение в храме от твоего имени.</p>
+        <div class="tprice">690 ₽</div>
+      </div>
+
+      <div class="tariff">
+        <div class="tname">Личный разбор</div>
+        <p class="tdesc">Всё то же самое, и после поездки запишу тебе голосовое: скажу, что вижу в твоём поле и что мешает исполнению желания.</p>
+        <p class="tdesc">В подарок гайд «Поток изобилия и исполнения»: как писать желания, чтобы они закреплялись, и усиливать их образами.</p>
+        <div class="tprice">990 ₽</div>
+      </div>
+
+      <p style="text-align:center; color:var(--muted); font-size:12.5px; font-style:italic; margin:-6px 0 18px;">Стоимость каждого уровня включает дорогу до места силы и подношение в храме.</p>
+
+      <a class="pay-btn" href="https://app.lava.top/products/1d5884ed-2210-43e2-afc9-08b937bdb2ec" target="_blank" rel="noopener" style="background:transparent; border:1px solid var(--gold); color:var(--gold); box-shadow:none;">Выбрать тариф и оплатить</a>
+    </section>
+
+    <figure class="photo tall"><img src="/assets/zolotye-listochki.jpg" alt="Желания на золотых листочках в месте силы" loading="lazy"><figcaption>Место силы, куда я отношу желания</figcaption></figure>
+
+    <section class="ritual" id="ritual" aria-labelledby="ritual-title">
+      <h2 id="ritual-title">Твоё желание</h2>
+      <p class="hint">Напиши своими словами, как чувствуешь. Здесь главное искренность.</p>
+
+      <div class="field">
+        <label for="name">Как тебя зовут</label>
+        <input type="text" id="name" placeholder="Имя (по желанию)" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label for="wish">Желание</label>
+        <textarea id="wish" placeholder="Я живу с моей мечтой и просыпаюсь спокойной…"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="step">Твоё намерение</label>
+        <input type="text" id="step" placeholder="От чего готова отказаться или что впустить в жизнь" autocomplete="off">
+        <p class="sub">По желанию. Это можно решить и потом, в личной переписке.</p>
+      </div>
+
+      <button class="btn" id="send">Передать желание и перейти к оплате</button>
+      <p class="sub" id="sendError" style="display:none; color:#C67C5B; text-align:center; margin-top:10px;">Не получилось отправить, попробуй ещё раз.</p>
+    </section>
+
+    <footer>
+      <div class="sig">daria.purr</div>
+      <div class="tag">Практики для женщин</div>
+      <p class="fine">Это духовная практика и работа с состоянием. Я не обещаю конкретных сумм или сроков и не заменяю врача или психолога.</p>
+    </footer>
+  </div>
+
+<script>
+  const CONFIG = {
+    apiUrl: "https://wish-api-production.up.railway.app/wish",
+    payUrl: "https://app.lava.top/products/1d5884ed-2210-43e2-afc9-08b937bdb2ec"
+  };
+
+  (function(){
+    const box = document.getElementById('embers'); const n = 14;
+    for(let i=0;i<n;i++){
+      const e = document.createElement('span'); e.className='ember';
+      e.style.left = Math.random()*100 + 'vw';
+      e.style.animationDuration = (10 + Math.random()*12) + 's';
+      e.style.animationDelay = (Math.random()*12) + 's';
+      const s = 2 + Math.random()*2; e.style.width=s+'px'; e.style.height=s+'px';
+      box.appendChild(e);
+    }
+  })();
+
+  const sendBtn = document.getElementById('send');
+  const sendError = document.getElementById('sendError');
+  sendBtn.addEventListener('click', async function(){
+    const name = document.getElementById('name').value.trim();
+    const wish = document.getElementById('wish').value.trim();
+    const step = document.getElementById('step').value.trim();
+    if(!wish){
+      const ta = document.getElementById('wish'); ta.focus();
+      ta.style.borderColor = '#C67C5B';
+      setTimeout(()=>{ ta.style.borderColor=''; }, 1600);
+      return;
+    }
+    sendError.style.display = 'none';
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Сохраняю...';
+    try{
+      const res = await fetch(CONFIG.apiUrl, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({name, wish, step})
+      });
+      if(!res.ok) throw new Error('bad response');
+      window.location.href = CONFIG.payUrl;
+    }catch(e){
+      sendBtn.disabled = false;
+      sendBtn.textContent = 'Передать желание и перейти к оплате';
+      sendError.style.display = 'block';
+    }
+  });
+</script>
+</body>
+</html>

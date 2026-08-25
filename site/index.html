@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Кэш-расклад от Белой Кошки · диагностика за 2 минуты</title>
+  <meta name="description" content="Короткий тест на 2 минуты. Смотрим, где утекает кэш и как вытащить застрявшие деньги за пару дней, спокойно и по шагам." />
+  <meta property="og:title" content="Кэш-расклад от Белой Кошки" />
+  <meta property="og:description" content="Кошка смотрит на тебя и не понимает, почему ты пашешь, а денег всё нет. Найди свой блок и застрявший кэш за 2 минуты." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23fce4ec'/><text x='16' y='22' text-anchor='middle' fill='%23d81b60' font-size='18'>🐾</text></svg>" />
+  <link rel="stylesheet" href="style.css?v=20260818a" />
+</head>
+<body>
+
+<!-- Theme Toggle -->
+<button class="theme-toggle" data-theme-toggle aria-label="Переключить тему">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</button>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+
+    <!-- Text column -->
+    <div class="hero-content" id="hero-content">
+      <div class="hero-badge">🔮 Кэш-расклад от Белой Кошки · 2 минуты</div>
+      <h1 class="hero-title">
+        Кошка смотрит на тебя<br />
+        и не понимает…<br />
+        <em class="highlight-pink">почему пашешь, а денег всё нет?</em>
+      </h1>
+      <p class="hero-sub">
+        Дело не в бюджете — деньги держит тело: тревога и привычка терпеть по чуть-чуть. Сделай расклад за 2 минуты, найди свой блок и узнай, как достать от 15 000 ₽ прямо сейчас.
+      </p>
+      <div class="hero-trust">
+        <span class="trust-pill">⏱ 2 минуты</span>
+        <span class="trust-pill">🎯 Без регистрации</span>
+        <span class="trust-pill">🐾 Белая кошка одобряет</span>
+      </div>
+      <button class="btn-primary btn-large" id="start-quiz">
+        Найти мой кэш 💸
+      </button>
+    </div>
+
+    <!-- Cat collage column -->
+    <div class="hero-cat-wrapper" id="hero-cat">
+      <span class="cat-question-marks">? ? ?</span>
+      <img src="cat.png" alt="Белая кошка смотрит на тебя" class="cat-png" />
+
+      <div class="cat-tag tag-top-right">
+        <span>опять импульсивные покупки</span>
+      </div>
+
+      <div class="cat-tag tag-middle-left">
+        <span>бесконечные сериалы вместо денежных действий</span>
+      </div>
+
+      <div class="cat-tag tag-bottom-right">
+        <span>работаешь без фокуса и стратегии</span>
+      </div>
+
+      <div class="cat-sticker">ты достойна лучшего, человек 💖</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ AUTHOR BLOCK ============ -->
+<section class="author-block" id="author">
+  <div class="author-inner author-card">
+    <div class="author-avatar-wrap">
+      <div class="author-avatar">
+        <img src="daria-photo.jpg" alt="Дарья, daria.purr" />
+      </div>
+      <span class="author-badge">Дарья 🐾</span>
+    </div>
+    <div class="author-text">
+      <p class="author-name">Дарья (daria.purr) и Белая Кошка 🐾</p>
+      <p class="author-bio">16 лет проверяю финансовые и телесные практики на себе. А Белая Кошка следит, чтобы всё было чётко, по делу и без успешного успеха.</p>
+      <ul class="author-points">
+        <li>✦ <strong>Без миллионных обещаний с неба</strong></li>
+        <li>✦ <strong>Только кэш, который уже принадлежит тебе</strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="quiz-section" id="quiz" hidden>
+  <div class="quiz-container">
+    <div class="quiz-progress">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <span class="progress-text" id="progress-text">Карта 1 из 7</span>
+      <span class="progress-hint">Кошка читает твои ответы 🐾</span>
+    </div>
+
+    <div class="quiz-intro" id="quiz-intro">
+      <p class="quiz-intro-text">🔮 Белая кошка достаёт первую карту. Выбирай вариант, который жмёт сильнее всего прямо сейчас.</p>
+    </div>
+
+    <div class="quiz-content" id="quiz-content">
+      <!-- Questions injected by JS -->
+    </div>
+
+    <div class="quiz-nav">
+      <button class="btn-ghost" id="quiz-back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Назад
+      </button>
+      <button class="btn-primary" id="quiz-next" disabled>
+        Открыть карту 🃏
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESULT ============ -->
+<section class="result-section" id="result" hidden>
+  <div class="result-container">
+
+    <div class="result-header">
+      <h2 class="result-main-title">Твой кэш-расклад готов! 💖</h2>
+      <p class="result-subtitle">Кошка вытянула твою карту, она подсвечена. Ниже разбор и первый шаг, который стоит сделать прямо сейчас.</p>
+    </div>
+
+    <div class="cards-grid" id="cards-grid">
+      <div class="tarot-card" data-card="1"><img src="card1.png" alt="Карта 1. Утечка кэша" class="card-img" /></div>
+      <div class="tarot-card" data-card="2"><img src="card2.png" alt="Карта 2. Застрявший кэш" class="card-img" /></div>
+      <div class="tarot-card" data-card="3"><img src="card3.png" alt="Карта 3. Невидимый блок" class="card-img" /></div>
+      <div class="tarot-card" data-card="4"><img src="card4.png" alt="Карта 4. Точка роста" class="card-img" /></div>
+    </div>
+
+    <div class="express-advice" id="express-advice"></div>
+
+    <div class="bridge-plaque">
+      <p><b>Ты уже забрала первый результат бесплатно.</b> Практикум «Забираем кэш» это 5 дней таких же точечных действий по всем твоим четырём картам.</p>
+    </div>
+
+    <div class="result-footer-trust">Белая кошка верит в тебя 🐾</div>
+
+    <div class="result-action-block">
+      <div class="offer-left">
+        <div class="offer-badge-discount">🔥 Скидка 80% · только сегодня</div>
+        <div class="offer-oldprice">9 900 ₽</div>
+        <div class="offer-price-tag">1 990 ₽ <span>· 5 дней</span></div>
+        <div class="offer-spots">Осталось <b>20 мест</b> в поток</div>
+        <div class="offer-timer">Спеццена сгорит через <b id="timer-clock">15:00</b></div>
+        <p class="offer-left-label">Что входит:</p>
+        <ul class="offer-left-list">
+          <li>Разбор всех 4 карт под твою ситуацию</li>
+          <li>Практики на состояние и снятие денежных блоков</li>
+          <li>Практические задания: отключаем утечки, продаём ненужное, поднимаем чек</li>
+          <li>Живой эфир с разбором</li>
+        </ul>
+      </div>
+      <div class="action-card">
+        <h4>✦ Что дальше на практикуме?</h4>
+        <ul class="obj-list">
+          <li><span class="obj-ico">⏱</span> 5 дней в закрытом Telegram, уроки до 10 минут, без вебинаров и созвонов.</li>
+          <li><span class="obj-ico">⚡</span> Первое задание на увеличение дохода делаешь уже в первые 24 часа.</li>
+          <li><span class="obj-ico">🛡</span> Спокойно: если за 5 дней не найдёшь хотя бы стоимость практикума, напиши мне, верну деньги.</li>
+        </ul>
+        <a href="https://app.lava.top/products/989edbfe-8f53-4131-bbc7-81626ff0be08" class="btn-pink-gradient" id="get-plan-btn" target="_blank" rel="noopener">🐾 Забрать деньги на практикуме за 1990 ₽ →</a>
+        <p class="cta-microtext">Мгновенный доступ после оплаты. Без звонков и менеджеров.</p>
+        <p class="action-note">Суммы у всех разные и зависят от того, сколько ты сделаешь.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ TRUST SECTION ============ -->
+<section class="trust-section" id="trust">
+  <div class="trust-inner">
+    <h2 class="trust-title">Почему расклад сработает</h2>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="trust-icon">🐾</div>
+        <h3>Видим кэш, который ты не замечаешь</h3>
+        <p>Кошка указывает на скрытые утечки и зависшие ресурсы, которые уже принадлежат тебе, но сливаются сквозь пальцы.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">⚡</div>
+        <h3>Результат за дни, не за месяцы</h3>
+        <p>Никаких долгих марафонов. Получаешь точечные действия и вытаскиваешь первые деньги в первые же дни.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">🔮</div>
+        <h3>Тело, состояние и сухие цифры</h3>
+        <p>Соединяем работу с денежной тревогой и чёткие шаги в реальном мире, без душноты и обещаний миллиона с неба.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESULTS / PROOF ============ -->
+<section class="proof-section" id="proof">
+  <div class="proof-inner">
+    <h2 class="proof-title">Результаты и отзывы</h2>
+    <p class="proof-sub">Живые сообщения женщин, которые уже забрали своё, и мои цифры за годы практики.</p>
+
+    <div class="metrics-bar">
+      <div class="metric"><span class="metric-num">1 545</span><span class="metric-label">учениц уже вытащили свои застрявшие деньги</span></div>
+      <div class="metric"><span class="metric-num">12 500 ₽</span><span class="metric-label">средняя сумма, которую участник «находит» в первую неделю</span></div>
+      <div class="metric"><span class="metric-num">24 часа</span><span class="metric-label">время до первого финансового результата</span></div>
+      <div class="metric"><span class="metric-num">16 лет</span><span class="metric-label">личной практики и проверки методик на себе</span></div>
+    </div>
+
+    <div class="reviews-grid">
+      <blockquote class="review-card">
+        <p>«За 3 дня отменила скрытые подписки на 4 200 ₽/мес и продала на Авито старый планшет за 14 000 ₽. Практикум окупился в 9 раз на второй день!»</p>
+        <footer>Юлия, графический дизайнер</footer>
+      </blockquote>
+      <blockquote class="review-card">
+        <p>«Всегда казалось, что у меня нет денег. По инструкции Кошки заглянула в автоплатежи — уходило по 6k на сервисы, которыми не пользуюсь полгода».</p>
+        <footer>Анна, фрилансер</footer>
+      </blockquote>
+    </div>
+
+    <p class="proof-note">Это реальные сообщения и данные из моей практики. Результат у каждой свой и зависит от того, сколько она сделала.</p>
+  </div>
+</section>
+
+<!-- ============ PROGRAM ============ -->
+<section class="program-section" id="program">
+  <div class="program-inner">
+    <h2 class="program-title">Программа практикума «Забираем кэш»</h2>
+    <p class="program-sub">5 дней, каждый день одно понятное действие и практика. Коротко, по делу, в Telegram.</p>
+    <div class="program-grid">
+
+      <div class="program-day">
+        <div class="day-badge">День 1</div>
+        <h3>Карта твоих денег</h3>
+        <p>Полная диагностика, где утекает и застревает кэш: подписки, тарифы, комиссии, автосписания. Собираешь свою карту утечек и перекрываешь первые дыры уже сегодня.</p>
+        <p class="day-result">Минус 5-10 тысяч утечек в месяц и ясная картина, где лежат твои деньги.</p>
+      </div>
+
+      <div class="program-day">
+        <div class="day-badge">День 2</div>
+        <h3>Быстрый кэш из расхламления</h3>
+        <p>Полная инвентаризация замороженных активов (техника, гардероб) плюс готовые продающие шаблоны для Авито и Юлы, которые выделят тебя среди тысяч объявлений.</p>
+        <p class="day-result">Разморозка пылящихся ресурсов и готовая система быстрых продаж без демпинга и слива за копейки.</p>
+      </div>
+
+      <div class="program-day">
+        <div class="day-badge">День 3</div>
+        <h3>Твоя настоящая цена</h3>
+        <p>Снимаем синдром самозванца и страх назвать цену. Практика на состояние плюс готовый скрипт, как поднять чек и вынести бесплатные доработки в платный пакет.</p>
+        <p class="day-result">Новая цена, которую называешь спокойно, без дрожи и скидок из страха.</p>
+      </div>
+
+      <div class="program-day">
+        <div class="day-badge">День 4</div>
+        <h3>Денежное состояние</h3>
+        <p>Работаем с телом и денежной тревогой: выходим из режима «мало», из которого деньги сливаются. Практики, которые держат новую норму, а не откатывают через день.</p>
+        <p class="day-result">Спокойное состояние достатка, из которого деньги удерживаются, а не утекают.</p>
+      </div>
+
+      <div class="program-day">
+        <div class="day-badge">День 5</div>
+        <h3>Система и второй доход</h3>
+        <p>Собираем результат недели и выстраиваем два-три источника дохода, чтобы он не висел на одной ниточке. Живой эфир с разбором твоей ситуации.</p>
+        <p class="day-result">Личный план роста и деньги, которые больше не зависят от одного источника.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ NOT FOR YOU ============ -->
+<section class="notfor-section" id="notfor">
+  <div class="notfor-inner">
+    <h2 class="notfor-title">Кому практикум не принесёт пользы</h2>
+    <ul class="notfor-list">
+      <li><span class="notfor-x">🚫</span> Тем, у кого финансовая система уже выстроена: ведёшь регулярный учёт, оптимизировала подписки и инвестируешь от 30% дохода.</li>
+      <li><span class="notfor-x">🚫</span> Тем, кто ищет теоретические лекции: здесь нет двухчасовых вебинаров, только точечные действия по 10-15 минут в день.</li>
+      <li><span class="notfor-x">🚫</span> Тем, кто не готов выделить эти 15 минут в день: практикум держится на регулярных микро-действиях, без них результата не будет.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq-section" id="faq">
+  <div class="faq-inner">
+    <h2 class="faq-title">Частые вопросы</h2>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>Что если у меня нет времени проходить уроки?</summary>
+        <div class="faq-body">Уроки идут по 5-10 минут. Все действия ты делаешь параллельно в телефоне. Это экономит твоё время, а не забирает его.</div>
+      </details>
+      <details class="faq-item">
+        <summary>А если я не найду никаких денег?</summary>
+        <div class="faq-body">Если ты выполнишь все пошаговые задания первого и второго дня и не найдёшь минимум 1 990 ₽, напиши мне, я верну тебе деньги.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Чем это отличается от обычных марафонов?</summary>
+        <div class="faq-body">Отсутствием «воды» и визуализаций. Мы работаем только с фактами: твоими счетами, твоими вещами, твоим телом и твоими действиями.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-logo">daria.purr 🐾</span>
+      <p class="footer-tagline">Твой кэш через тело и состояние, без марафонов и надрыва</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://t.me/publicbezysiliu" target="_blank" rel="noopener">Telegram</a>
+      <a href="#">Instagram</a><span style="font-size:11px;color:#999;display:block;margin-top:2px;">Instagram — продукт компании Meta, признанной экстремистской организацией, деятельность которой запрещена на территории РФ</span>
+    </div>
+  </div>
+
+  <div class="legal">
+    <div class="legal-info">
+      <p>ИП Дегтярева Дарья Денисовна</p>
+      <p>ОГРНИП: 325270000046898 · ИНН: 352831506449</p>
+      <p>E-mail: privacybezysiliu@gmail.com · Телефон: +7 929 288 27 20</p>
+    </div>
+    <div class="legal-links">
+      <a href="terms.html" target="_blank" rel="noopener">Публичная оферта</a>
+      <span>·</span>
+      <a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a>
+      <span>·</span>
+      <a href="cookies.html" target="_blank" rel="noopener">Cookies</a>
+    </div>
+    <p class="legal-copy">© 2026 Все права защищены. Оплата защищена 256-битным SSL-шифрованием.</p>
+  </div>
+</footer>
+
+<script src="script.js?v=20260818a"></script>
+</body>
+</html>
